@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>40degrees - Premium Car Detailing | Yanchep, WA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.03) 50%, transparent 70%);
+            background-size: 200% 200%;
+            animation: shimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: 0% 0%;
+                opacity: 0.3;
+            }
+            50% {
+                background-position: 100% 100%;
+                opacity: 0.6;
+            }
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,107,0,0.08) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c3a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ff6b00, transparent);
+            margin: 40px auto;
+        }
+
+        .description {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #d0d0d0;
+            margin-bottom: 50px;
+        }
+
+        .location {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: #ff8c3a;
+            margin-bottom: 50px;
+            padding: 15px 30px;
+            background: rgba(255, 107, 0, 0.1);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 140, 58, 0.3);
+        }
+
+        .location svg {
+            width: 20px;
+            height: 20px;
+            fill: #ff8c3a;
+        }
+
+        .contact {
+            margin-top: 40px;
+        }
+
+        .contact-title {
+            font-size: 0.9rem;
+            color: #808080;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .email {
+            display: inline-block;
+            font-size: 1.3rem;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, #ff6b00 0%, #ff8c3a 100%);
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.3);
+            font-weight: 500;
+        }
+
+        .email:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 0, 0.5);
+        }
+
+        .coming-soon {
+            margin-top: 60px;
+            font-size: 0.9rem;
+            color: #606060;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            .tagline {
+                font-size: 1rem;
+            }
+
+            .description {
+                font-size: 1rem;
+            }
+
+            .email {
+                font-size: 1.1rem;
+                padding: 15px 35px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="logo">40degrees</h1>
+        <p class="tagline">Premium Car Detailing</p>
+        
+        <div class="divider"></div>
+        
+        <p class="description">
+            Where precision meets passion. Experience automotive care<br>
+            that goes beyond the surface.
+        </p>
+        
+        <div class="location">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            Yanchep, down to Perth and beyond
+        </div>
+        
+        <div class="contact">
+            <p class="contact-title">Get in Touch</p>
+            <a href="mailto:detailing@40degrees.au" class="email">detailing@40degrees.au</a>
+        </div>
+        
+        <p class="coming-soon">WEBSITE LAUNCHING SOON</p>
+    </div>
+</body>
+</html>
