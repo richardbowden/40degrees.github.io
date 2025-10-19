@@ -200,50 +200,54 @@
     </div>
 
     <script>
-        // Create bokeh circles
+        // Create bokeh circles with custom animation
         const container = document.getElementById('bokehContainer');
         const bokehData = [
-            { size: 350, top: '10%', left: '5%', duration: 20000, delay: 0 },
-            { size: 250, top: '50%', left: '85%', duration: 18000, delay: 2000 },
-            { size: 300, top: '80%', left: '12%', duration: 22000, delay: 4000 },
-            { size: 200, top: '25%', left: '70%', duration: 16000, delay: 1000 },
-            { size: 280, top: '60%', left: '45%', duration: 19000, delay: 3000 }
+            { size: 350, top: 10, left: 5, speedX: 0.3, speedY: 0.4, rangeX: 50, rangeY: 60 },
+            { size: 250, top: 50, left: 85, speedX: 0.25, speedY: 0.35, rangeX: 40, rangeY: 50 },
+            { size: 300, top: 80, left: 12, speedX: 0.28, speedY: 0.38, rangeX: 45, rangeY: 55 },
+            { size: 200, top: 25, left: 70, speedX: 0.32, speedY: 0.42, rangeX: 35, rangeY: 45 },
+            { size: 280, top: 60, left: 45, speedX: 0.27, speedY: 0.37, rangeX: 48, rangeY: 58 }
         ];
 
+        const bokehs = [];
+        
         bokehData.forEach((data, index) => {
             const bokeh = document.createElement('div');
             bokeh.className = 'bokeh';
             bokeh.style.width = data.size + 'px';
             bokeh.style.height = data.size + 'px';
-            bokeh.style.top = data.top;
-            bokeh.style.left = data.left;
+            bokeh.style.top = data.top + '%';
+            bokeh.style.left = data.left + '%';
             container.appendChild(bokeh);
-
-            // Animate each bokeh circle
-            anime({
-                targets: bokeh,
-                translateX: [
-                    { value: anime.random(-50, 50), duration: data.duration / 2 },
-                    { value: 0, duration: data.duration / 2 }
-                ],
-                translateY: [
-                    { value: anime.random(-60, 60), duration: data.duration / 2 },
-                    { value: 0, duration: data.duration / 2 }
-                ],
-                opacity: [
-                    { value: 0.6, duration: data.duration / 3 },
-                    { value: 0.3, duration: data.duration / 3 },
-                    { value: 0.5, duration: data.duration / 3 }
-                ],
-                scale: [
-                    { value: 1.1, duration: data.duration / 2 },
-                    { value: 1, duration: data.duration / 2 }
-                ],
-                easing: 'easeInOutQuad',
-                loop: true,
-                delay: data.delay
+            
+            bokehs.push({
+                element: bokeh,
+                data: data,
+                time: Math.random() * 1000
             });
         });
+
+        // Animation loop
+        function animate() {
+            const now = Date.now();
+            
+            bokehs.forEach(bokeh => {
+                const elapsed = (now + bokeh.time) * 0.001;
+                
+                const x = Math.sin(elapsed * bokeh.data.speedX) * bokeh.data.rangeX;
+                const y = Math.cos(elapsed * bokeh.data.speedY) * bokeh.data.rangeY;
+                const opacity = 0.35 + Math.sin(elapsed * 0.5) * 0.15;
+                const scale = 1 + Math.sin(elapsed * 0.3) * 0.1;
+                
+                bokeh.element.style.transform = `translate(${x}px, ${y}px) scale(${scale})`;
+                bokeh.element.style.opacity = opacity;
+            });
+            
+            requestAnimationFrame(animate);
+        }
+        
+        animate();
     </script>
 </body>
 </html>
