@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>40degrees - Premium Car Detailing | Yanchep, WA</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -39,138 +40,7 @@
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, rgba(255, 140, 58, 0.5), rgba(255, 107, 0, 0.3), transparent);
             filter: blur(60px);
-            opacity: 0.4;
-        }
-
-        .bokeh1 {
-            width: 350px;
-            height: 350px;
-            top: 10%;
-            left: 5%;
-            animation: float1 20s ease-in-out infinite;
-        }
-
-        .bokeh2 {
-            width: 250px;
-            height: 250px;
-            top: 50%;
-            right: 8%;
-            animation: float2 18s ease-in-out infinite 2s;
-        }
-
-        .bokeh3 {
-            width: 300px;
-            height: 300px;
-            bottom: 10%;
-            left: 12%;
-            animation: float3 22s ease-in-out infinite 4s;
-        }
-
-        .bokeh4 {
-            width: 200px;
-            height: 200px;
-            top: 25%;
-            right: 25%;
-            animation: float4 16s ease-in-out infinite 1s;
-        }
-
-        .bokeh5 {
-            width: 280px;
-            height: 280px;
-            bottom: 35%;
-            left: 45%;
-            animation: float5 19s ease-in-out infinite 3s;
-        }
-
-        @keyframes float1 {
-            0%, 100% {
-                transform: translate(0, 0);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translate(40px, -30px);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translate(20px, -60px);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translate(-20px, -40px);
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes float2 {
-            0%, 100% {
-                transform: translate(0, 0);
-                opacity: 0.4;
-            }
-            25% {
-                transform: translate(-50px, 40px);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translate(-30px, 70px);
-                opacity: 0.3;
-            }
-            75% {
-                transform: translate(-10px, 50px);
-                opacity: 0.5;
-            }
-        }
-
-        @keyframes float3 {
-            0%, 100% {
-                transform: translate(0, 0);
-                opacity: 0.35;
-            }
-            25% {
-                transform: translate(30px, -50px);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translate(60px, -30px);
-                opacity: 0.45;
-            }
-            75% {
-                transform: translate(40px, -10px);
-                opacity: 0.4;
-            }
-        }
-
-        @keyframes float4 {
-            0%, 100% {
-                transform: translate(0, 0);
-                opacity: 0.3;
-            }
-            33% {
-                transform: translate(-35px, 45px);
-                opacity: 0.5;
-            }
-            66% {
-                transform: translate(-15px, 25px);
-                opacity: 0.4;
-            }
-        }
-
-        @keyframes float5 {
-            0%, 100% {
-                transform: translate(0, 0);
-                opacity: 0.4;
-            }
-            25% {
-                transform: translate(45px, -35px);
-                opacity: 0.55;
-            }
-            50% {
-                transform: translate(25px, -55px);
-                opacity: 0.35;
-            }
-            75% {
-                transform: translate(10px, -25px);
-                opacity: 0.5;
-            }
+            will-change: transform, opacity;
         }
 
         .container {
@@ -301,13 +171,7 @@
     </style>
 </head>
 <body>
-    <div class="bokeh-container">
-        <div class="bokeh bokeh1"></div>
-        <div class="bokeh bokeh2"></div>
-        <div class="bokeh bokeh3"></div>
-        <div class="bokeh bokeh4"></div>
-        <div class="bokeh bokeh5"></div>
-    </div>
+    <div class="bokeh-container" id="bokehContainer"></div>
     
     <div class="container">
         <h1 class="logo">40degrees</h1>
@@ -334,5 +198,52 @@
         
         <p class="coming-soon">WEBSITE LAUNCHING SOON</p>
     </div>
+
+    <script>
+        // Create bokeh circles
+        const container = document.getElementById('bokehContainer');
+        const bokehData = [
+            { size: 350, top: '10%', left: '5%', duration: 20000, delay: 0 },
+            { size: 250, top: '50%', left: '85%', duration: 18000, delay: 2000 },
+            { size: 300, top: '80%', left: '12%', duration: 22000, delay: 4000 },
+            { size: 200, top: '25%', left: '70%', duration: 16000, delay: 1000 },
+            { size: 280, top: '60%', left: '45%', duration: 19000, delay: 3000 }
+        ];
+
+        bokehData.forEach((data, index) => {
+            const bokeh = document.createElement('div');
+            bokeh.className = 'bokeh';
+            bokeh.style.width = data.size + 'px';
+            bokeh.style.height = data.size + 'px';
+            bokeh.style.top = data.top;
+            bokeh.style.left = data.left;
+            container.appendChild(bokeh);
+
+            // Animate each bokeh circle
+            anime({
+                targets: bokeh,
+                translateX: [
+                    { value: anime.random(-50, 50), duration: data.duration / 2 },
+                    { value: 0, duration: data.duration / 2 }
+                ],
+                translateY: [
+                    { value: anime.random(-60, 60), duration: data.duration / 2 },
+                    { value: 0, duration: data.duration / 2 }
+                ],
+                opacity: [
+                    { value: 0.6, duration: data.duration / 3 },
+                    { value: 0.3, duration: data.duration / 3 },
+                    { value: 0.5, duration: data.duration / 3 }
+                ],
+                scale: [
+                    { value: 1.1, duration: data.duration / 2 },
+                    { value: 1, duration: data.duration / 2 }
+                ],
+                easing: 'easeInOutQuad',
+                loop: true,
+                delay: data.delay
+            });
+        });
+    </script>
 </body>
 </html>
