@@ -1,1 +1,0 @@
-# 40degrees.github.io
